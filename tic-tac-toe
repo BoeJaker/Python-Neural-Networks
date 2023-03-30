@@ -1,0 +1,70 @@
+import numpy as np
+
+# Define the neural network architecture
+input_size = 9
+hidden_size = 18
+output_size = 9
+
+# Initialize the weights
+w1 = np.random.randn(input_size, hidden_size)
+w2 = np.random.randn(hidden_size, output_size)
+
+# Define the activation functions
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+def softmax(x):
+    exp_x = np.exp(x)
+    return exp_x / np.sum(exp_x)
+
+# Define the forward pass function
+def forward(x):
+    h = sigmoid(np.dot(x, w1))
+    y = softmax(np.dot(h, w2))
+    return y
+
+# Define the function to select the next move
+def select_move(board, player):
+    valid_moves = []
+    input_board = np.zeros(input_size)
+    for i in range(input_size):
+        if board[i] == 0:
+            valid_moves.append(i)
+            if player == 1:
+                input_board[i] = 1
+            else:
+                input_board[i] = -1
+    y = forward(input_board)
+    move = np.argmax(y)
+    while move not in valid_moves:
+        y[move] = 0
+        move = np.argmax(y)
+    return move
+
+# Define the function to play a game
+def play_game():
+    board = np.zeros(input_size)
+    player = 1
+    winner = 0
+    while winner == 0:
+        move = select_move(board, player)
+        if player == 1:
+            board[move] = 1
+            player = -1
+        else:
+            board[move] = -1
+            player = 1
+        winner = check_winner(board)
+    return winner
+
+# Define the function to check if there's a winner
+def check_winner(board):
+    for i in range(3):
+        if (board[i*3] == board[i*3+1] == board[i*3+2]) and (board[i*3] != 0):
+            return int(board[i*3])
+        if (board[i] == board[i+3] == board[i+6]) and (board[i] != 0):
+            return int(board[i])
+    if (board[0] == board[4] == board[8]) and (board[0] != 0):
+        return
+
+play_game()

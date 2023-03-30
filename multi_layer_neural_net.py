@@ -1,10 +1,10 @@
 import numpy as np
-
+import time
 def sigmoid(x,deriv=False):
-	if(deriv==True):
-	    return x*(1-x)
+    if(deriv==True):
+        return x*(1-x)
     else:
-	    return 1/(1+np.exp(-x))
+        return 1/(1+np.exp(-x))
     
 X = np.array([[0,0,1],
             [0,1,1],
@@ -16,7 +16,7 @@ y = np.array([[0],
 			[1],
 			[0]])
 
-np.random.seed(1)
+np.random.seed(int(time.time()))
 
 # randomly initialize our weights
 W0 = np.random.random((3,4))
