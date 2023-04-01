@@ -14597,7 +14597,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Neural-Network-Architecture">Neural Network Architecture<a class="anchor-link" href="#Neural-Network-Architecture">&#182;</a></h1><p>A neural network is a type of machine learning algorithm that is modeled after the structure of the human brain. It consists of layers of interconnected nodes, or neurons, that process information and output a result. Neural network architecture refers to the design and configuration of these layers, including the number of layers, the number of neurons in each layer, and the types of connections between them. There are many different configurations and methods for building neural networks, such as feedforward networks, recurrent networks, convolutional networks, and more. These different architectures and techniques are suited for different types of problems and data, and choosing the right one can greatly improve the accuracy and efficiency of your model. In this Jupyter notebook, we will explore the basics of neural network architecture and examine various configurations and methods for building and training effective models.</p>
+<h1 id="Neural-Network-Architecture">Neural Network Architecture<a class="anchor-link" href="#Neural-Network-Architecture">&#182;</a></h1><p>A neural network is a type of machine learning algorithm that is modeled after the structure of the human brain. It consists of layers of interconnected nodes, or neurons, that process information and output a result. Neural network architecture refers to the design and configuration of these layers, including the number of layers, the number of neurons in each layer, and the types of connections between them.</p>
+<p>There are many different configurations and methods for building neural networks, such as feedforward networks, recurrent networks, convolutional networks, and more. These different architectures and techniques are suited for different types of problems and data, and choosing the right one can greatly improve the accuracy and efficiency of your model.</p>
+<p>In this Jupyter notebook, we will explore the basics of neural network architecture and examine various configurations and methods for building and training effective models.</p>
 <hr />
 <h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><h3 id="Architecture">Architecture<a class="anchor-link" href="#Architecture">&#182;</a></h3><ul>
 <li><a href="#Perceptron">Perceptron</a></li>
@@ -14638,9 +14640,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Step-2:-Define-the-sigmoid-activation-function">Step 2: Define the sigmoid activation function<a class="anchor-link" href="#Step-2:-Define-the-sigmoid-activation-function">&#182;</a></h3><p><img src="assets/images/sigmoid.png" alt="sigmoid" /></p>
-<p>A visual representation of a sigmoid function
-The sigmoid() function is a mathematical function that maps any input value to a value between 0 and 1, which is useful for modeling the behavior of neurons in a neural network.</p>
+<h3 id="Step-2:-Define-the-sigmoid-activation-function">Step 2: Define the sigmoid activation function<a class="anchor-link" href="#Step-2:-Define-the-sigmoid-activation-function">&#182;</a></h3><p><img src="assets/images/sigmoid.png" alt="sigmoid" /><em>A visual representation of a sigmoid function</em></p>
+</br>
+The sigmoid() function is a mathematical function that maps any input value to a value between 0 and 1, which is useful for modeling the behavior of neurons in a neural network.
 <p>An activation function is a crucial step in both artificial and biological neural networks. It allows neurons to do more than simply output the input they receive. Instead, the activation function works in a way that is similar to the rate at which action potentials fire in the brain.</p>
 
 </div>
@@ -14675,8 +14677,7 @@ The sigmoid() function is a mathematical function that maps any input value to a
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Step-3:-Define-the-neural-network-architecture">Step 3: Define the neural network architecture<a class="anchor-link" href="#Step-3:-Define-the-neural-network-architecture">&#182;</a></h3><p><img src="assets/images/perceptron.png" alt="Single Layer Perceptron" /></p>
-<p>Diagram of a single layer perceptron</p>
+<h3 id="Step-3:-Define-the-neural-network-architecture">Step 3: Define the neural network architecture<a class="anchor-link" href="#Step-3:-Define-the-neural-network-architecture">&#182;</a></h3><p><img src="assets/images/perceptron.png" alt="Single Layer Perceptron" /><em>Diagram of a single layer perceptron</em></p>
 </br>
 Our neural network will consist of an input layer with three nodes, and an output layer with one node. This is known as a single layer perceptron.
 <p>The specific size and number of layers in a neural network depend on factors such as problem complexity, dataset size, and available resources. A general rule of thumb is to match the input and output layers to the data. Hidden layers between the two will be covered in the next article.</p>
@@ -14939,7 +14940,7 @@ These deltas are then used to update the weights of the network in the direction
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <hr />
-<h2 id="LSTM"><a href="Architectures/lstm.py">LSTM</a><a class="anchor-link" href="#LSTM">&#182;</a></h2><p><img src="assets/images/lstm.png" alt="LSTM Architecture" /></p>
+<h2 id="LSTM"><a href="Architectures/lstm.py">LSTM</a><a class="anchor-link" href="#LSTM">&#182;</a></h2><p><img src="assets/images/lstm.png" alt="LSTM Architecture" /><em>A high level diagram of an LSTM architecture</em></p>
 <h3 id="Introduction:">Introduction:<a class="anchor-link" href="#Introduction:">&#182;</a></h3><p>This section will provide an overview of a neural network code written in Python. The code includes a function for computing the sigmoid nonlinearity, a function for converting the output of the sigmoid function to its derivative, and a training dataset generation. It also initializes neural network weights, defines input variables, and has training logic to train the network on a simple addition problem.</p>
 <h3 id="Importing-Libraries:">Importing Libraries:<a class="anchor-link" href="#Importing-Libraries:">&#182;</a></h3><p>The first step in the code is to import two libraries, &quot;copy&quot; and &quot;numpy&quot;. These libraries are required for various functions in the code. The numpy library is used to work with arrays and mathematical operations, while the copy library is used for copying objects.</p>
 <h3 id="Sigmoid-Function:">Sigmoid Function:<a class="anchor-link" href="#Sigmoid-Function:">&#182;</a></h3><p>The sigmoid function is a common activation function used in neural networks. It converts any input value to a value between 0 and 1. The sigmoid function defined in this code takes a parameter &quot;x&quot; and applies the formula 1 / (1 + exp(-x)) to it. The result is returned as the output of the function.</p>
