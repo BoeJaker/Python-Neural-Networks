@@ -14597,8 +14597,260 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Neural-Network-Architecture">Neural Network Architecture<a class="anchor-link" href="#Neural-Network-Architecture">&#182;</a></h1><h2 id="Perceptron"><a href="Architectures/perceptron.py">Perceptron</a><a class="anchor-link" href="#Perceptron">&#182;</a></h2><p><img src="assets/images/perceptron.png" alt="Perceptron" /></p>
+<h1 id="Neural-Network-Architecture">Neural Network Architecture<a class="anchor-link" href="#Neural-Network-Architecture">&#182;</a></h1><p>A neural network is a type of machine learning algorithm that is modeled after the structure of the human brain. It consists of layers of interconnected nodes, or neurons, that process information and output a result. Neural network architecture refers to the design and configuration of these layers, including the number of layers, the number of neurons in each layer, and the types of connections between them. There are many different configurations and methods for building neural networks, such as feedforward networks, recurrent networks, convolutional networks, and more. These different architectures and techniques are suited for different types of problems and data, and choosing the right one can greatly improve the accuracy and efficiency of your model. In this Jupyter notebook, we will explore the basics of neural network architecture and examine various configurations and methods for building and training effective models.</p>
+<hr />
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><h3 id="Architecture">Architecture<a class="anchor-link" href="#Architecture">&#182;</a></h3><ul>
+<li><a href="#Perceptron">Perceptron</a></li>
+<li><a href="#LSTM">Long Short Term Memory (LSTM)</a></li>
+</ul>
+<h3 id="Training-Data">Training Data<a class="anchor-link" href="#Training-Data">&#182;</a></h3><ul>
+<li><a href="#Training">Common Crawl</a></li>
+</ul>
+<hr />
+<h2 id="Perceptron"><a href="Architectures/perceptron.py">Perceptron</a><a class="anchor-link" href="#Perceptron">&#182;</a></h2><p><a href="https://boejaker.com/index.php/2023/03/16/how-to-build-a-simple-neural-network-in-python-using-numpy/">this writeup can also be found here</a></p>
+<h3 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h3><p>Neural networks are a type of machine learning model that are designed to mimic the behavior of the human brain. They are used for a wide range of applications, from image and speech recognition to natural language processing and predictive analytics.</p>
+<p>In this section, i will show you how to write a simple neural network, known as a perceptron, in Python using the NumPy library. This neural network will consist of an input layer, and an output layer, with a sigmoid activation function. The following steps are the basic building blocks of all typical, modern, neural network architectures. It is the basis of all modern AI systems like chat-GPT, DALL-E, and co-pilot.</p>
+<h3 id="Step-1:-Import-NumPy">Step 1: Import NumPy<a class="anchor-link" href="#Step-1:-Import-NumPy">&#182;</a></h3><p>First, we need to import the NumPy library, which provides support for large, multi-dimensional arrays and matrices, along with a wide range of mathematical functions. This is the only library we need.</p>
 
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Step-2:-Define-the-sigmoid-activation-function">Step 2: Define the sigmoid activation function<a class="anchor-link" href="#Step-2:-Define-the-sigmoid-activation-function">&#182;</a></h3><p><img src="assets/images/sigmoid.png" alt="sigmoid" /></p>
+<p>A visual representation of a sigmoid function
+The sigmoid() function is a mathematical function that maps any input value to a value between 0 and 1, which is useful for modeling the behavior of neurons in a neural network.</p>
+<p>An activation function is a crucial step in both artificial and biological neural networks. It allows neurons to do more than simply output the input they receive. Instead, the activation function works in a way that is similar to the rate at which action potentials fire in the brain.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Sigmoid activation function</span>
+
+<span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">deriv</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">deriv</span><span class="o">==</span><span class="kc">True</span><span class="p">):</span> 
+        <span class="k">return</span> <span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span> 
+        <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Step-3:-Define-the-neural-network-architecture">Step 3: Define the neural network architecture<a class="anchor-link" href="#Step-3:-Define-the-neural-network-architecture">&#182;</a></h3><p><img src="assets/images/perceptron.png" alt="Single Layer Perceptron" /></p>
+<p>Diagram of a single layer perceptron</p>
+</br>
+Our neural network will consist of an input layer with three nodes, and an output layer with one node. This is known as a single layer perceptron.
+<p>The specific size and number of layers in a neural network depend on factors such as problem complexity, dataset size, and available resources. A general rule of thumb is to match the input and output layers to the data. Hidden layers between the two will be covered in the next article.</p>
+<p>Ultimately, the best architecture should be determined through experimentation to find the one that performs best for the specific problem.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">input_layer</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">output_layer</span> <span class="o">=</span> <span class="mi">1</span>
+
+
+<span class="c1"># Input matrix, 4 entires each with 3 inputs</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>  <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="p">])</span>
+    
+<span class="c1"># Output set, 1 output per input entry            </span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>  <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                <span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Step-4:-Initialize-the-weights">Step 4: Initialize the weights<a class="anchor-link" href="#Step-4:-Initialize-the-weights">&#182;</a></h3><p>The weights are the parameters that the neural network will learn during training. We will seed a numpy random number generator with np.random.seed(1), then initialize the weights randomly using the np.random.random() function.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Initialize the array of weights randomly</span>
+<span class="n">W0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">((</span><span class="n">input_layer</span><span class="p">,</span><span class="n">output_layer</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Step-5:-Define-the-forward-propagation-function">Step 5: Define the forward propagation function<a class="anchor-link" href="#Step-5:-Define-the-forward-propagation-function">&#182;</a></h3><p>The forward_propagate() propagation function computes the output of the perceptron for a given input. It does this by multiplying the input by the weights of the input layer, and applying the sigmoid activation function.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">forward_propagate</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">L0</span> <span class="o">=</span> <span class="n">X</span>
+    <span class="n">L1</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L0</span><span class="p">,</span><span class="n">W0</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">L1</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Step-6:-Train-the-perceptron">Step 6: Train the perceptron<a class="anchor-link" href="#Step-6:-Train-the-perceptron">&#182;</a></h3><p>The train() function passes the input thorough the forward propagation function. Then it performs a series of calculations known as backpropagation, which is used to update the weights of the network based on the error between the predicted output and the target output. Backpropagation consists of three steps
+The layer one error is calculated by subtracting the predicted output (L1) from the target output (y).
+The layer one delta, or the gradients of the layer one error with respect to the weights of each layer are then computed.
+These deltas are then used to update the weights of the network in the direction of the gradient.</p>
+<p>This process is repeated for a specified number of epochs, or until the error is minimized.</p>
+
+</div>
+</div>
+</div>
+</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">W0</span>
+    <span class="k">for</span> <span class="nb">iter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10000</span><span class="p">):</span>
+
+        <span class="c1"># Forward propagation</span>
+        <span class="n">L0</span> <span class="o">=</span> <span class="n">X</span>
+        <span class="n">L1</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L0</span><span class="p">,</span><span class="n">W0</span><span class="p">))</span>
+
+        <span class="c1"># Calculate the difference between the predicted output (L1) </span>
+        <span class="c1">#  and target output (y)</span>
+        <span class="n">L1_error</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">L1</span>
+
+        <span class="c1"># Multiply how much we missed by the slope of the sigmoid </span>
+        <span class="c1">#  at the values in L1</span>
+        <span class="n">L1_delta</span> <span class="o">=</span> <span class="n">L1_error</span> <span class="o">*</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">L1</span><span class="p">,</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Update weights using the delta</span>
+        <span class="n">W0</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">L0</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">L1_delta</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Output After Training:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">L1</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Step-7:-Test-the-perceptron">Step 7: Test the perceptron<a class="anchor-link" href="#Step-7:-Test-the-perceptron">&#182;</a></h3><p>To test our perceptron, we need to execute the train function, then we can pass a sample input through the forward_propagate() function and print the output.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>The result variable will be a value between 0 and 1, which represents the perceptorn’s prediction for the output. For clarity we have chosen to round the output to either 0 or 1 in the print() statement.</p>
+<p>This test results in the output [[1.]], which is the correct output as per the training data.</p>
+<h2 id="The-Complete-Code">The Complete Code<a class="anchor-link" href="#The-Complete-Code">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -14686,7 +14938,20 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="LSTM"><a href="Architectures/lstm.py">LSTM</a><a class="anchor-link" href="#LSTM">&#182;</a></h2>
+<hr />
+<h2 id="LSTM"><a href="Architectures/lstm.py">LSTM</a><a class="anchor-link" href="#LSTM">&#182;</a></h2><p><img src="assets/images/lstm.png" alt="LSTM Architecture" /></p>
+<h3 id="Introduction:">Introduction:<a class="anchor-link" href="#Introduction:">&#182;</a></h3><p>This section will provide an overview of a neural network code written in Python. The code includes a function for computing the sigmoid nonlinearity, a function for converting the output of the sigmoid function to its derivative, and a training dataset generation. It also initializes neural network weights, defines input variables, and has training logic to train the network on a simple addition problem.</p>
+<h3 id="Importing-Libraries:">Importing Libraries:<a class="anchor-link" href="#Importing-Libraries:">&#182;</a></h3><p>The first step in the code is to import two libraries, &quot;copy&quot; and &quot;numpy&quot;. These libraries are required for various functions in the code. The numpy library is used to work with arrays and mathematical operations, while the copy library is used for copying objects.</p>
+<h3 id="Sigmoid-Function:">Sigmoid Function:<a class="anchor-link" href="#Sigmoid-Function:">&#182;</a></h3><p>The sigmoid function is a common activation function used in neural networks. It converts any input value to a value between 0 and 1. The sigmoid function defined in this code takes a parameter &quot;x&quot; and applies the formula 1 / (1 + exp(-x)) to it. The result is returned as the output of the function.</p>
+<h3 id="Sigmoid-Output-to-Derivative-Function:">Sigmoid Output to Derivative Function:<a class="anchor-link" href="#Sigmoid-Output-to-Derivative-Function:">&#182;</a></h3><p>The sigmoid output to derivative function defined in this code takes a parameter &quot;output&quot;, which is the output value of the sigmoid function applied to some input. The function then returns the derivative of the sigmoid function applied to that output value.</p>
+<h3 id="Training-Dataset-Generation:">Training Dataset Generation:<a class="anchor-link" href="#Training-Dataset-Generation:">&#182;</a></h3><p>The next step in the code is to generate a training dataset. It does so by creating a binary dictionary of numbers and then generates two random numbers within a range of half the largest number. It then uses binary encoding to represent these numbers and generates their sum. These binary numbers are used to train the neural network to predict their sum.</p>
+<h3 id="Input-Variables:">Input Variables:<a class="anchor-link" href="#Input-Variables:">&#182;</a></h3><p>The input variables defined in this code include alpha, input_dim, hidden_dim, and output_dim. Alpha represents the learning rate of the neural network. Input_dim represents the number of input neurons, hidden_dim represents the number of hidden neurons, and output_dim represents the number of output neurons.</p>
+<h3 id="Initialize-Neural-Network-Weights:">Initialize Neural Network Weights:<a class="anchor-link" href="#Initialize-Neural-Network-Weights:">&#182;</a></h3><p>The code initializes the neural network weights using a random function from the numpy library. The weights are initialized for the input-hidden, hidden-output, and hidden-hidden layers of the neural network.</p>
+<h3 id="Training-Logic:">Training Logic:<a class="anchor-link" href="#Training-Logic:">&#182;</a></h3><p>The code then enters the training logic, which iterates 10,000 times. It generates two random numbers and their binary representations, computes their sum, and stores their binary representation as the true answer. It then initializes the variable &quot;overallError&quot; to 0 and initializes two lists, &quot;layer_2_deltas&quot; and &quot;layer_1_values&quot;, to store the error in the output layer and the hidden layer values, respectively.</p>
+<p>It then moves along the binary representation of the numbers, generating input and output values for each position. It computes the hidden layer values and the output layer values using the sigmoid function. It then calculates the error in the output layer and stores it in the &quot;layer_2_deltas&quot; list. It also computes the binary value of the output and stores it in the variable &quot;d&quot;. It then stores the hidden layer values in the &quot;layer_1_values&quot; list for use in the next iteration.</p>
+<p>After the binary digits have been iterated through, the code enters the backpropagation step. It initializes the variable &quot;future_layer_1_delta&quot; to 0 and iterates through the binary digits in reverse order. For each digit, it computes the error in the output and the hidden layer, updates the weights, and stores the delta values for use in the next iteration.</p>
+<p>The weights are updated using the learning rate, the delta values, and the input and hidden layer values. The update values for each weight are stored in three separate update matrices, which are then added to the weight matrices. Finally, the update matrices are set to zero, and the code prints out the overall error and the predicted and</p>
+
 </div>
 </div>
 </div>
@@ -14910,10 +15175,10 @@ True:[0 0 0 0 1 1 1 0]
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Training-Data">Training Data<a class="anchor-link" href="#Training-Data">&#182;</a></h2><h3 id="Common-Crawl-Requests">Common Crawl Requests<a class="anchor-link" href="#Common-Crawl-Requests">&#182;</a></h3><p><a href="Training%20Data/wet_requests.py">wet_requests</a></p>
-<p>Common Crawl is a web corpus that contains a vast amount of text data in multiple languages. The corpus is created by continuously crawling the internet and indexing the text from web pages, making it a valuable resource for training language models. Because Common Crawl contains text from a diverse range of sources, it provides a broad and varied sample of natural language, which is essential for training language models that can understand and generate human-like text. Additionally, because Common Crawl is freely available and accessible to researchers and developers worldwide, it has become a popular resource for training language models, with many state-of-the-art models using the dataset as a basis for their training.</p>
-<p>Below is a Python script that demonstrates how to download and extract content from WET files in Common Crawl. WET files are a type of web archive format used by Common Crawl to store text content from web pages. The script uses the requests library to download a list of WET file paths for the March 2023 crawl from Common Crawl's website. It then loops over each file path, downloads the corresponding WET file, decompresses it, and extracts its content using the warcio library. Finally, it decodes and prints the contents of the first three records (this can be changed) in each WET file. This code can be useful for researchers and developers who want to extract text data from Common Crawl for use in natural language processing or machine learning applications.</p>
-<p>The code imports the necessary libraries to download and process the web crawl data. It then sets the URL of the WET file paths for the March 2023 crawl, which contains the web crawl data in a compressed format.</p>
+<hr />
+<h2 id="Training">Training<a class="anchor-link" href="#Training">&#182;</a></h2><h3 id="Common-Crawl-Requests">Common Crawl Requests<a class="anchor-link" href="#Common-Crawl-Requests">&#182;</a></h3><p>Common Crawl is a web corpus that contains a vast amount of text data in multiple languages. The corpus is created by continuously crawling the internet and indexing the text from web pages, making it a valuable resource for training language models. Because Common Crawl contains text from a diverse range of sources, it provides a broad and varied sample of natural language, which is essential for training language models that can understand and generate human-like text. Additionally, because Common Crawl is freely available and accessible to researchers and developers worldwide, it has become a popular resource for training language models, with many state-of-the-art models using the dataset as a basis for their training.</p>
+<h3 id="Common-Crawl-Wet-Requests"><a href="Training%20Data/wet_requests.py">Common Crawl Wet Requests</a><a class="anchor-link" href="#Common-Crawl-Wet-Requests">&#182;</a></h3><p>WET files are a type of web archive format used by Common Crawl to store text content from web pages. The script uses the requests library to download a list of WET file paths for the March 2023 crawl from Common Crawl's website. It then loops over each file path, downloads the corresponding WET file, decompresses it, and extracts its content using the warcio library. Finally, it decodes and prints the contents of the first three records (this can be changed) in each WET file. This code can be useful for researchers and developers who want to extract text data from Common Crawl for use in natural language processing or machine learning applications.</p>
+<p>The <a href="Training%20Data/wet_requests.py">code</a> below imports the necessary libraries to download and process the web crawl data. It then sets the URL of the WET file paths for the March 2023 crawl, which contains the web crawl data in a compressed format.</p>
 <p>Next, it downloads the list of WET file paths using the requests library and decompresses the file using gzip. The decompressed file contains a list of URLs of individual WET files.</p>
 <p>After splitting the file content into individual file paths, the code loops over each file path, downloads the corresponding WET file, and prints its contents. The warcio library is used to create a WARC iterator, which iterates over the records in the WET file. The contents of the first three records are printed for demonstration purposes.</p>
 
@@ -15119,22 +15384,6 @@ publisher: Common Crawl
 
 </div>
 
-</div>
-
-</div><div  class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
 </div>
