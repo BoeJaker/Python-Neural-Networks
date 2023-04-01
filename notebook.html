@@ -14597,19 +14597,77 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Neural-Network-Architecture">Neural Network Architecture<a class="anchor-link" href="#Neural-Network-Architecture">&#182;</a></h1><p>A neural network is a type of machine learning algorithm that is modeled after the structure of the human brain. It consists of layers of interconnected nodes, or neurons, that process information and output a result. Neural network architecture refers to the design and configuration of these layers, including the number of layers, the number of neurons in each layer, and the types of connections between them.</p>
+<h1 id="Neural-Network-Architecture">Neural Network Architecture<a class="anchor-link" href="#Neural-Network-Architecture">&#182;</a></h1><p>This notebook can also be found <a href="https://nbviewer.org/github/BoeJaker/Python-Neural-Networks/blob/master/notebook.ipynb">here</a></p>
+<p>A neural network is a type of machine learning algorithm that is modeled after the structure of the human brain. It consists of layers of interconnected nodes, or neurons, that process information and output a result. Neural network architecture refers to the design and configuration of these layers, including the number of layers, the number of neurons in each layer, and the types of connections between them.</p>
 <p>There are many different configurations and methods for building neural networks, such as feedforward networks, recurrent networks, convolutional networks, and more. These different architectures and techniques are suited for different types of problems and data, and choosing the right one can greatly improve the accuracy and efficiency of your model.</p>
 <p>In this Jupyter notebook, we will explore the basics of neural network architecture and examine various configurations and methods for building and training effective models.</p>
 <hr />
-<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><h3 id="Architecture">Architecture<a class="anchor-link" href="#Architecture">&#182;</a></h3><ul>
-<li><a href="#Perceptron">Perceptron</a></li>
-<li><a href="#LSTM">Long Short Term Memory (LSTM)</a></li>
-</ul>
-<h3 id="Training-Data">Training Data<a class="anchor-link" href="#Training-Data">&#182;</a></h3><ul>
-<li><a href="#Training">Common Crawl</a></li>
-</ul>
+<h2 id="Contents">Contents<a class="anchor-link" href="#Contents">&#182;</a></h2><h3>Architecture</br></h3>
+<p><a href="#Perceptron">Perceptron (SLP)</a>
+    </br>A perceptron is a type of artificial neural network that is used for binary classification </br>
+<a href="#MLP">Perceptron (MLP)</a>
+    </br>A type of neural network made up of multiple perceptrons arranged in layers. It's commonly used for tasks like classification and prediction.</br>
+<a href="#">Feedforward Neural Network</a>
+    </br>These neural networks are the simplest type of neural network where the information flows in one direction from input to output layer without any feedback.</br>
+<a href="#">Convolutional Neural Networks (CNN)</a>
+    </br>Used for image recognition and analysis, and are characterized by the use of convolutional layers, pooling layers, and fully connected layers.</br>
+<a href="#RNN">Recurrant Neural network (RNN)</a>
+    </br>Designed for processing sequential data, such as time-series or natural language processing (NLP) tasks. They are characterized by the use of feedback loops that allow the network to maintain a &quot;memory&quot; of past inputs. </br>
+<a href="#LSTM">Long Short Term Memory (LSTM)</a>
+    </br>A type of RNN that can selectively remember or forget past inputs. They are commonly used for NLP tasks such as language translation or text summarization.</br>
+<a href="#">Autoencoder Neural Networks</a>
+    </br>Used for unsupervised learning and feature extraction. They consist of an encoder network that maps the input to a lower-dimensional space, and a decoder network that maps the lower-dimensional representation back to the original input.</br>
+<a href="#">Generative Adversarial Networks</a>
+    </br>Used for generative modeling and image synthesis. They consist of a generator network that generates fake images and a discriminator network that attempts to distinguish between the fake images and real images.</br>
+<a href="#">Siamese Neural Networks</a>
+    </br>Siamese networks are used for tasks such as image comparison and similarity scoring. They consist of two identical neural networks that share the same weights and process two inputs independently before combining them to produce an output.</br>
+<a href="#">Reinforcement Learning Neural Networks</a>
+    </br>Reinforcement learning networks are used for learning through trial and error. They consist of an agent that interacts with an environment and receives rewards or punishments for its actions. The network learns to optimize its actions to maximize its rewards over time.</br>
+<a href="#">Modular Neural Network</a>
+    </br>These networks consist of multiple independent neural networks that can be combined to form a larger network. This allows for more efficient training and better performance on complex tasks.</br>
+<a href="#">Spiking Neural Network</a>
+    </br> These networks are designed to simulate the behavior of biological neurons, where information is transmitted through spikes of electrical activity. They are commonly used for modeling biological systems and for applications such as robotics and control systems.</br>
+<a href="#">Deep Belief Networks (DBN)</a>
+    </br>A type of generative neural network that use a stack of Restricted Boltzmann Machines (RBMs) to learn a hierarchical representation of the data. They are commonly used for feature extraction and unsupervised learning.</br>
+<a href="#">Echo State Networks</a>
+    </br>These networks are a type of recurrent neural network that use a large reservoir of randomly connected neurons to process input data. The output of the network is determined by a linear combination of the reservoir neurons. They are commonly used for time-series prediction and control tasks.</br>
+<a href="#">Capsule Networks</a>
+    </br>A type of neural network that use capsules instead of neurons as the basic processing unit. Each capsule represents an instantiation of a specific entity or feature, and the network learns to recognize objects by combining the output of multiple capsules. They are commonly used for image recognition tasks.</br>
+<a href="#">Neural Turing Machines</a>
+    </br>These networks combine a neural network with an external memory system, allowing the network to learn algorithms and perform tasks that require long-term memory. They are commonly used for tasks such as program synthesis and language modeling.</br>
+<a href="#">Attention Mechanism Networks</a>
+    </br>Attention mechanism networks use an attention mechanism to selectively focus on different parts of the input data when processing it. This allows the network to selectively attend to important features and ignore irrelevant ones. They are commonly used for NLP tasks such as machine translation and text summarization.</br>
+<a href="#">Transformer Network</a>
+    </br>A type of neural network architecture commonly used in natural language processing (NLP) tasks, such as machine translation, language modeling, and text classification. It was introduced in the paper &quot;Attention Is All You Need&quot; by Vaswani et al. in 2017.</br></p>
+<h3 id="Encoding">Encoding<a class="anchor-link" href="#Encoding">&#182;</a></h3><p><a href="#">One-Hot</a>
+    </br>This is a technique that converts categorical variables into a set of binary features, where each feature corresponds to a unique category.</br>
+<a href="#">Label</a>
+    </br>This is a technique that assigns a unique integer to each category of a categorical variable.</br>
+<a href="#">Binary Encoding</a>
+    </br>This is a technique that converts categorical variables into binary features, where each feature represents a different category, and only one feature is active (set to 1) for each sample. </br>
+<a href="#">Count Encoding</a>
+    </br>This is a technique that replaces each category with the count of its occurrences in the dataset.</br>
+<a href="#">Continuous</a>
+    </br><br />
+<a href="#">Circular</a>
+    </br>If the time of day is an important feature, it can be encoded using a variety of methods. One common approach is to use circular encoding, where the time of day is mapped onto a circle (e.g. 12:00pm is at the top of the circle, 6:00am is at the bottom) to capture the cyclical nature of time.</br>
+<a href="#">Embedding</a>
+    </br>This is a technique that maps categorical variables to a low-dimensional vector space, where each category is represented by a vector.</br>
+<a href="#">Scaling and Normalisation</a>
+    </br>Scaling and Normalization: This is a technique that scales and normalizes continuous variables to ensure that they have a similar range and distribution.</br>
+<a href="#">Binnig</a>
+    </br>This is a technique that discretizes continuous variables into a set of categories or bins.</br>
+<a href="#">Feature Extraction</a>
+    </br>This is a technique that extracts relevant features from the input data and represents them as a set of input features for the neural network.</br></p>
+<h3 id="Training-Data">Training Data<a class="anchor-link" href="#Training-Data">&#182;</a></h3><h4 id="Text-Corpus">Text Corpus<a class="anchor-link" href="#Text-Corpus">&#182;</a></h4><p><a href="#Training">Common Crawl</a>
+ </br>A vast corpus containing crawls of the entire internet</br>
+ <a href="#">Web Text</a>
+ </br>A diy corpus of reddit posts</br>
+ <a href="#">Wikipedia</a>
+ </br>The Online Encyclopedia</br></p>
 <hr />
-<h2 id="Perceptron"><a href="Architectures/perceptron.py">Perceptron</a><a class="anchor-link" href="#Perceptron">&#182;</a></h2><p><a href="https://boejaker.com/index.php/2023/03/16/how-to-build-a-simple-neural-network-in-python-using-numpy/">this writeup can also be found here</a></p>
+<h2 id="Perceptron"><a href="Architectures/perceptron.py">Perceptron</a><a class="anchor-link" href="#Perceptron">&#182;</a></h2><p>A perceptron is a type of artificial neural network that is used for binary classification&lt;&gt;</p>
+<p><a href="https://boejaker.com/index.php/2023/03/16/how-to-build-a-simple-neural-network-in-python-using-numpy/">this writeup can also be found here</a></p>
 <h3 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h3><p>Neural networks are a type of machine learning model that are designed to mimic the behavior of the human brain. They are used for a wide range of applications, from image and speech recognition to natural language processing and predictive analytics.</p>
 <p>In this section, i will show you how to write a simple neural network, known as a perceptron, in Python using the NumPy library. This neural network will consist of an input layer, and an output layer, with a sigmoid activation function. The following steps are the basic building blocks of all typical, modern, neural network architectures. It is the basis of all modern AI systems like chat-GPT, DALL-E, and co-pilot.</p>
 <h3 id="Step-1:-Import-NumPy">Step 1: Import NumPy<a class="anchor-link" href="#Step-1:-Import-NumPy">&#182;</a></h3><p>First, we need to import the NumPy library, which provides support for large, multi-dimensional arrays and matrices, along with a wide range of mathematical functions. This is the only library we need.</p>
@@ -15176,7 +15234,7 @@ True:[0 0 0 0 1 1 1 0]
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<hr />
+<p></br>***</p>
 <h2 id="Training">Training<a class="anchor-link" href="#Training">&#182;</a></h2><h3 id="Common-Crawl-Requests">Common Crawl Requests<a class="anchor-link" href="#Common-Crawl-Requests">&#182;</a></h3><p>Common Crawl is a web corpus that contains a vast amount of text data in multiple languages. The corpus is created by continuously crawling the internet and indexing the text from web pages, making it a valuable resource for training language models. Because Common Crawl contains text from a diverse range of sources, it provides a broad and varied sample of natural language, which is essential for training language models that can understand and generate human-like text. Additionally, because Common Crawl is freely available and accessible to researchers and developers worldwide, it has become a popular resource for training language models, with many state-of-the-art models using the dataset as a basis for their training.</p>
 <h3 id="Common-Crawl-Wet-Requests"><a href="Training%20Data/wet_requests.py">Common Crawl Wet Requests</a><a class="anchor-link" href="#Common-Crawl-Wet-Requests">&#182;</a></h3><p>WET files are a type of web archive format used by Common Crawl to store text content from web pages. The script uses the requests library to download a list of WET file paths for the March 2023 crawl from Common Crawl's website. It then loops over each file path, downloads the corresponding WET file, decompresses it, and extracts its content using the warcio library. Finally, it decodes and prints the contents of the first three records (this can be changed) in each WET file. This code can be useful for researchers and developers who want to extract text data from Common Crawl for use in natural language processing or machine learning applications.</p>
 <p>The <a href="Training%20Data/wet_requests.py">code</a> below imports the necessary libraries to download and process the web crawl data. It then sets the URL of the WET file paths for the March 2023 crawl, which contains the web crawl data in a compressed format.</p>
@@ -15399,6 +15457,20 @@ Filtering could be achieved via another neural network designed to extract engli
 <p>After filtering the WET data using existing tools or custom scripts, you may want to further refine the data to meet your specific requirements. For example, you may want to exclude certain types of content, such as pages written in a particular language or containing specific keywords. Alternatively, you may want to prioritize certain types of content, such as news articles or blog posts.</p>
 <p>To achieve this level of filtering, you can use more advanced techniques such as machine learning classifiers or natural language processing (NLP) algorithms. These tools can help you identify patterns and extract relevant information from the text, such as sentiment, topic, or author. By applying these techniques, you can create a more targeted and high-quality dataset for training your neural network.</p>
 <p>Overall, the process of filtering the WET data involves a combination of manual and automated techniques, depending on your specific goals and resources. It requires careful planning and experimentation to find the right balance between relevance, quality, and scalability. However, with the right tools and techniques, you can create a powerful training dataset for your language model and unlock its full potential.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div  class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Transformer">Transformer<a class="anchor-link" href="#Transformer">&#182;</a></h2><p>The transformer model relies on a self-attention mechanism, which allows it to process input sequences in parallel, rather than sequentially like traditional recurrent neural networks (RNNs). This makes it more efficient and better suited for longer sequences.</p>
+<p>In a transformer, the input sequence is first embedded into a high-dimensional space, and then multiple layers of self-attention and feedforward neural networks are applied. The self-attention mechanism allows the model to weigh the importance of different parts of the input sequence when making predictions. The feedforward neural networks then transform the representations learned by the self-attention layers into a form that can be used for the final prediction.</p>
+<p>Transformers have shown state-of-the-art performance on a variety of NLP tasks and have been widely adopted in both research and industry.</p>
 
 </div>
 </div>
